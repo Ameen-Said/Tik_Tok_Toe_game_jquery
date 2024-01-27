@@ -1,0 +1,57 @@
+body{
+    font-family: 'Permanent Marker', cursive;
+}
+.grid{
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    position: absolute;
+    right: 50%;
+    top: 50%;
+    margin-right: -100px;
+    margin-top: -150px;
+    row-gap: 2px;
+    column-gap: 6px;
+    
+ 
+}
+
+
+.cell{
+    height: 100px;
+    width: 100px;
+    border: 2px solid #0088cc;
+    font-size: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #DCF2F1;
+    
+}
+
+.cell:hover{
+    background-color: #7FC7D9;
+}
+
+span{
+ 
+    font-size:15px;
+    font-size: 20px;
+    color: rgb(178, 34, 34);
+    display: flex;
+    justify-content: center;
+    margin-left: -120px;
+  
+}
+
+span:hover{
+    color:#365486;
+}
+
+.player{
+    font-size: 60px;
+    color: rgb(178, 34, 34);
+    display: flex;
+    justify-content: center;
+    margin-left: -140px;
+    margin-top: 40px;
+}

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <title>TikTacToe</title>
+
+</head>
+<body>
+    <div class="player">x Turn</div>
+        <div class="grid" >
+
+            <div class="cell" index ="1"> </div>
+            <div class="cell" index ="2"> </div>
+            <div class="cell" index ="3"> </div>
+            <div class="cell" index ="4"> </div>
+            <div class="cell" index ="5"> </div>
+            <div class="cell" index ="6"> </div>
+            <div class="cell" index ="7"> </div>
+            <div class="cell" index ="8"> </div>
+            <div class="cell" index ="9"> </div>
+        
+        </div>
+    <div class="result"></div>
+</body>
+
+<script>
+
+let currentplayer = 'x';
+let currentplays = {
+    x:[],
+    o:[]
+};
+let moves = 0;
+
+const winingcomb = [
+    [1,2,3],
+    [4,5,6],
+    [7,8,9],
+    [1,4,7],
+    [2,5,8],
+    [3,6,9],
+    [1,5,9],
+    [3,5,7]
+
+];
+let gameover = false;
+
+$(".cell").click(function(){
+    if(gameover){
+        return;
+    }
+moves++;
+    let repeatblock = $(this).text();
+    if(repeatblock == "x" || repeatblock == "o"){
+        return;
+    }
+
+$(this).text(currentplayer);
+
+
+currentplays[currentplayer].push(parseInt($(this).attr("index")));
+
+if(checkwin()){
+$(".result").append("<span> Winner is: " + currentplayer + "</span>");
+$(".result").append("<span onclick="+"playagain()"+"> Play again </span>");
+ gameover = true;
+    return;
+}
+
+if(currentplayer == 'x'){
+    currentplayer = 'o';
+}else{
+    currentplayer = 'x';
+}
+if(moves == 9){
+    $(".result").append("<span onclick="+"playagain()"+"> Play again </span>");
+    return;
+}
+$(".player").text(currentplayer + " Turn");
+console.log(moves);
+})
+
+function checkwin(){
+    if(moves < 5){
+        return;
+    }
+   
+   
+ for( let i = 0; i <winingcomb.length; i++){
+     
+    let iswinner = true;
+
+    for( let j = 0; j< winingcomb[i].length;j++ ){
+       
+        if($.inArray(winingcomb[i][j],currentplays[currentplayer]) < 0){
+        iswinner = false;
+        
+        console.log("hi",iswinner);
+        break;
+        }
+    }
+    if(iswinner){
+        return true;
+    }
+ }
+   
+return false;
+
+}
+
+    
+    function playagain(){
+        $(".cell").text("");
+        moves=0;
+        currentplayer = "x";
+        currentplays = {
+    x:[],
+    o:[]
+};
+$(".result").find("span").remove();
+$(".player").text("x Turn");
+gameover = false;
+
+    }
+</script>
+
+
+
+</html>
